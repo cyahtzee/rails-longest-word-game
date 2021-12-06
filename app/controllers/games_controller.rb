@@ -6,9 +6,10 @@ class GamesController < ApplicationController
   end
 
   def score
+    session[:score] = 0 unless session[:score].nil?
     @word = params[:word]
     @play_field = params[:letters]
-    @message = ""
+    @message = ''
     @message = "Sorry but #{@word} cannot be build with #{@play_field}" unless valid_word?(@word)
     @message = "Congratulations! #{@word} is a valid English word." if valid_word?(@word) && dictionary?(@word)
     @message = "Sorry but #{@word} does not seem like a valid English word..." unless dictionary?(@word)
